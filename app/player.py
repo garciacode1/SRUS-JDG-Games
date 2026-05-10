@@ -13,6 +13,6 @@ class Player:
     def name(self):
         return self.__name
 
-    """string method to return readable string ->player object"""
     def __str__(self):
+        """string method to return readable string ->player object"""
         return f"Player: {self.__name}, Unique id: {self.__uid}"
