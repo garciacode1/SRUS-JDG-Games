@@ -4,7 +4,6 @@ class Player:
         self.__uid = uid
         self.__name = name
 
-    """private instance variables"""
     @property
     def uid(self):
         return self.__uid
