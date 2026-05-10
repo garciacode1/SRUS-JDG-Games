@@ -10,7 +10,9 @@ class PlayerListTest(unittest.TestCase):
         player_list = PlayerList()
 
         player_list.insert_head(player)
+
         self.assertEqual(player, player_list.head.player)
+        self.assertEqual(player, player_list.tail.player)
 
     def test_insert_head_when_list_is_not_empty(self):
         first_player = Player("p1", "Mike")
@@ -24,6 +26,7 @@ class PlayerListTest(unittest.TestCase):
         self.assertEqual(second_player, player_list.head.player)
         self.assertEqual(first_player, player_list.head.next.player)
         self.assertEqual(player_list.head, player_list.head.next.previous)
+        self.assertEqual(first_player, player_list.tail.player)
 
 
 if __name__ == '__main__':
