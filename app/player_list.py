@@ -12,6 +12,7 @@ class PlayerList:
     def head(self):
         """Return head node at head of list"""
         return self.__head
+
     @property
     def tail(self):
         """Return tail node at tail of list"""
@@ -34,3 +35,16 @@ class PlayerList:
             new_node.next = self.__head
             self.__head.previous = new_node
             self.__head = new_node
+
+    def insert_tail(self, player):
+        """Function to insert player at tail of list"""
+
+        new_node = PlayerNode(player)
+
+        if self.is_empty:
+            self.__tail = new_node
+            self.__head = new_node
+        else:
+            new_node.previous = self.__tail
+            self.__tail.next = new_node
+            self.__tail = new_node
