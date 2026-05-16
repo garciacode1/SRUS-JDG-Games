@@ -67,7 +67,8 @@ class PlayerList:
         return removed_node
 
     def delete_item_from_tail(self):
-        """delete player from tail of list"""
+        """delete item from tail of list"""
+
         if self.is_empty:
             return None
 
@@ -80,3 +81,38 @@ class PlayerList:
             self.__head = None
             self.__tail = None
         return removed_node
+
+    def delete_item_by_key(self, key):
+        """Delete player by key from list"""
+
+        current_node = self.__head
+
+        while current_node is not None:
+
+            if current_node.key == key:
+
+                if current_node == self.__head:
+
+                    if self.__head == self.__tail:
+                        self.__head = None
+                        self.__tail = None
+
+                    else:
+                        self.__head = self.__head.next
+                        self.__head.previous = None
+
+                elif current_node == self.__tail:
+
+                    self.__tail = self.__tail.previous
+                    self.__tail.next = None
+
+                else:
+
+                    current_node.previous.next = current_node.next
+                    current_node.next.previous = current_node.previous
+
+                return current_node
+
+            current_node = current_node.next
+
+        return None
