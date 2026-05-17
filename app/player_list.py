@@ -110,9 +110,34 @@ class PlayerList:
 
                     current_node.previous.next = current_node.next
                     current_node.next.previous = current_node.previous
-
                 return current_node
 
             current_node = current_node.next
-
         return None
+
+    def display(self, forward=True):
+        """Display linked list"""
+
+        # Display from head to tail
+        if forward:
+
+            print("Displaying list from head to tail:")
+
+            current_node = self.__head
+
+            while current_node is not None:
+                print(current_node)
+
+                current_node = current_node.next
+
+        # Display from tail to head
+        else:
+
+            print("Displaying list from tail to head:")
+
+            current_node = self.__tail
+
+            while current_node is not None:
+                print(current_node)
+
+                current_node = current_node.previous
