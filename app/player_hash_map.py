@@ -13,4 +13,4 @@ class PlayerHashMap:
 
     def get_index(self, key) -> int:
         """Return hash map index for the given key."""
-        return Player.hash(key) % self.SIZE
+        return Player.calculate_hash(key) % self.SIZE
