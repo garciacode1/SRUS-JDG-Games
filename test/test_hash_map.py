@@ -50,6 +50,33 @@ class TestHashMap(unittest.TestCase):
         self.assertIsNone(player_to_be_removed)
         self.assertEqual(2, player_hash_map.size())
 
+    def test_if_size_increases_properly(self):
+
+        player_hash_map = PlayerHashMap()
+
+        player_hash_map.put("p1", "John")
+        player_hash_map.put("p2", "Daniel")
+        player_hash_map.put("p3", "Monique")
+        player_hash_map.put("p4", "Nelson")
+
+        self.assertEqual(4, player_hash_map.size())
+
+    def test_if_size_decreases_properly(self):
+        player_hash_map = PlayerHashMap()
+
+        player_hash_map.put("p1", "John")
+        player_hash_map.put("p2", "Daniel")
+        player_hash_map.put("p3", "Monique")
+        player_hash_map.put("p4", "Nelson")
+
+        player_hash_map.remove("p4")
+        player_hash_map.remove("p3")
+        player_hash_map.remove("p2")
+
+        self.assertEqual(1,player_hash_map.size())
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
