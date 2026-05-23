@@ -75,6 +75,21 @@ class TestHashMap(unittest.TestCase):
 
         self.assertEqual(1,player_hash_map.size())
 
+    def test_collision_players_are_retrieves_accurately(self):
+        player_hash_map = PlayerHashMap()
+
+        player_hash_map.put("p1", "John")
+        player_hash_map.put("p21", "Daniel")
+        player_hash_map.put("p31", "Monique")
+
+        first_player_added = player_hash_map.get("p1")
+        second_player_added = player_hash_map.get("p21")
+        third_player_added = player_hash_map.get("p31")
+
+        self.assertEqual("John", first_player_added.name)
+        self.assertEqual("Daniel", second_player_added.name)
+        self.assertEqual("Monique", third_player_added.name)
+        self.assertEqual(3, player_hash_map.size())
 
 
 
