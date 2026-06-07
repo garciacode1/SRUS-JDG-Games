@@ -1,5 +1,6 @@
 class Player:
     """Class player and attributes"""
+
     def __init__(self, uid, name, score=0):
         self.__uid = uid
         self.__name = name
@@ -56,3 +57,7 @@ class Player:
     def __str__(self):
         """string method to return readable string ->player object"""
         return f"Player: {self.__name}, Unique id: {self.__uid}"
+
+    def __lt__(self, other):
+        """Return True if this player score is less than the other player score."""
+        return self.__score < other.score

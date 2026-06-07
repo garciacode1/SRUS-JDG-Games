@@ -97,7 +97,17 @@ def test_sort_players(self):
 What was the outcome of running the above unit test, copy paste the output **for just this particular test** below:
 
 ```text
-Copy the traceback you got when you ran the test here.
+ERROR: test_sort_players (test_player.PlayerTest.test_sort_players)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\test\test_player.py", line 16, in test_sort_players
+    players = [Player("Alice", uid='01', score=10), Player("Bob", uid='02', score=5),
+TypeError: Player.__init__() got multiple values for argument 'uid'
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.009s
+
+FAILED (errors=1)
 ```
 
 ### 4.3. Success criteria
@@ -114,8 +124,12 @@ What is the **only** magic method that must be implemented in the player class f
 
 **Hint:** if you don't recall this from class, the error message you got when you ran the test will help you.
 -------
-> Answer Here
-> Yes, here - instead of this text!
+> Answer Here:
+> The required dunder method is __lt__, which defines behaviour for less than operator, <.
+> In the context of this program, Python’s sorted() function uses it to compare two Player objects
+> in order to decide their order.
+> For this task, the dunder method __lt__ will compare the players by score, 
+> in order to giv priority to the player with lower score.
 -------
 #### 4.3.2. Task: Implement the magic method in the Player class
 
@@ -136,7 +150,17 @@ def test_players_can_be_compared_by_score(self):
 Run the test and confirm that your error resembles the previous error
 
 ```text
-INSERT ERROR OUTPUT HERE
+======================================================================
+ERROR: test_players_can_be_compared_by_score (test_player.PlayerTest.test_players_can_be_compared_by_score)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\test\test_player.py", line 36, in test_players_can_be_compared_by_score
+    self.assertTrue(bob < alice)
+                    ^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Player' and 'Player'
+
+======================================================================
+
 ```
 
 - Implement the appropriate magic method in the Player class and ensure you pass this test
