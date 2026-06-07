@@ -180,15 +180,32 @@ TypeError: '<' not supported between instances of 'Player' and 'Player'
 
 Rerun `test_sort_players` does the test pass? If not, include the output below:
 
-```text
-Your output here
+```
+======================================================================
+ERROR: test_sort_players (test_player.PlayerTest.test_sort_players)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\test\test_player.py", line 16, in test_sort_players
+    players = [Player("Alice", uid='01', score=10), Player("Bob", uid='02', score=5),
+               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Player.__init__() got multiple values for argument 'uid'
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.006s
+
+FAILED (errors=1)
+
 ```
 
 ##### 4.3.4.1 Question: why did the equality comparison fail?
 Why did the test fail (note: if it doesn't fail, it means there is something you have already done before you were asked to do so - if that's the case, you need to figure out what that is!)?
 -------
-> Answer here
->
+> Answer here:
+> After I added the comparison test and added __lt__, the sorting test still failed.
+>The error was: TypeError: Player.__init__() got multiple values for argument 'uid'
+>This means the problem is now with the order of the parameters in the Player constructor.
+> The test gives "Alice" first, and also gives uid="01"
+> However, my constructor expects uid first. Because of this, Python thinks uid was given two times.
 -------
 Add the necessary code to the Player class to ensure that the `test_sort_players` test passes.
 
