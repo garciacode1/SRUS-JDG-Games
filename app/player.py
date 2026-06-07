@@ -1,8 +1,9 @@
 class Player:
     """Class player and attributes"""
-    def __init__(self, uid, name):
+    def __init__(self, uid, name, score=0):
         self.__uid = uid
         self.__name = name
+        self.score = score
 
     @property
     def uid(self):
@@ -15,6 +16,20 @@ class Player:
     @name.setter
     def name(self, name):
         self.__name = name
+
+    @property
+    def score(self):
+        return self.__score
+
+    @score.setter
+    def score(self, score):
+        if score < 0:
+            raise ValueError("Score cannot be a negative value")
+        self.__score = score
+
+    def __repr__(self):
+        """Return string representation."""
+        return f"Player(name='{self.__name}', uid='{self.__uid}', score={self.__score})"
 
     @classmethod
     def calculate_hash(cls, key):
