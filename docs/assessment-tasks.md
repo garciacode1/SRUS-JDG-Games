@@ -336,9 +336,26 @@ Using the code above as a starting point, create a test case to test your custom
 
 Include your test case below:
 
-```python
+```
+    def test_custom_sort_quickly_sorts_1000_players(self):
+        random.seed(42)
 
-# YOUR TEST CASE HERE
+        players = []
+
+        for i in range(1000):
+            player = Player(f"{i:03}", f"Player {i}", score=random.randint(0, 1000))
+            players.append(player)
+
+        custom_sorted_players = Player.sort_quickly(players)
+
+        custom_scores = []
+
+        for player in custom_sorted_players:
+            custom_scores.append(player.score)
+
+        expected_scores = sorted(custom_scores, reverse=True)
+
+        self.assertEqual(expected_scores, custom_scores)
 
 ```
 
