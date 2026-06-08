@@ -247,7 +247,12 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> Answer here
+> Answer here:
+> Expected time complexity:
+> The expected time complexity is O(n log n). This means it is usually fast because it splits the list into smaller parts.
+> However, if the first item chosen (pivot) is a bad choice, the time complexity could be O(n²), especially when list is already sorted. 
+> Expected space complexity:
+> The space complexity is O(n log n) because this version creates new left and right lists while sorting.
 
 ### 5.2. Task: Implement the custom sorting algorithm
 
@@ -255,14 +260,54 @@ What is the expected time and space complexity of the above algorithm? You can a
 
 Use the sample above (and its algorithm) as a starting point to implement a `classmethod` in the Player class that takes a list of players and returns a list of players sorted by score in **descending** order. Top scores come first!
 
+```
+ @classmethod
+    def sort_quickly(cls, players):
+        """Return players sorted by score in descending order."""
+
+        if len(players) <= 1:
+            return players
+
+        pivot = players[0]
+        left = []
+        right = []
+
+        for player in players[1:]:
+            if player.score > pivot.score:
+                left.append(player)
+            else:
+                right.append(player)
+
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+```
 #### 5.2.2. Create a test cases
 
 Add a separate test case to `test_player.py` to test your custom sorting algorithm
 
 Include your code below:
 
-```python
-# YOUR CUSTOM Sorting here
+```
+    def test_custom_sort_quickly_sorts_players_by_score_descending(self):
+        players = [
+            Player("01", "Alice", 10),
+            Player("02", "Bob", 5),
+            Player("03", "Charlie", 15),
+            Player("04", "Paul", 20),
+            Player("05", "Matheus", 30),
+        ]
+
+        sorted_players = Player.sort_quickly(players)
+
+        manually_sorted_players = [
+            Player("05", "Matheus", 30),
+            Player("04", "Paul", 20),
+            Player("03", "Charlie", 15),
+            Player("01", "Alice", 10),
+            Player("02", "Bob", 5)
+
+        ]
+
+        self.assertListEqual(sorted_players, manually_sorted_players)
 ```
 
 #### 5.2.3. Success criteria

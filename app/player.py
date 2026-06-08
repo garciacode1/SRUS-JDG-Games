@@ -43,6 +43,24 @@ class Player:
 
         return total
 
+    @classmethod
+    def sort_quickly(cls, players):
+        """Return players sorted by score in descending order."""
+
+        if len(players) <= 1:
+            return players
+
+        pivot = players[0]
+        left = []
+        right = []
+
+        for player in players[1:]:
+            if player.score > pivot.score:
+                left.append(player)
+            else:
+                right.append(player)
+
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
     def __hash__(self):
         """Return hash value for the player."""
         return self.calculate_hash(self.__uid)
