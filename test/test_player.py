@@ -85,5 +85,26 @@ class PlayerTest(unittest.TestCase):
 
         self.assertEqual(expected_scores, custom_scores)
 
+    def test_custom_sort_quickly_with_1000_sorted_players(self):
+        players = []
+
+        for i in range(1000, 0, -1):
+            player = Player(f"{i:03}", f"Player {i}", score=i)
+            players.append(player)
+
+        sorted_players = Player.sort_quickly(players)
+
+        expected_scores = []
+
+        for player in players:
+            expected_scores.append(player.score)
+
+        actual_scores = []
+
+        for player in sorted_players:
+            actual_scores.append(player.score)
+
+        self.assertEqual(expected_scores, actual_scores)
+
 if __name__ == '__main__':
     unittest.main()

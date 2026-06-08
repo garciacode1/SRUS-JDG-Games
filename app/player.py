@@ -50,17 +50,21 @@ class Player:
         if len(players) <= 1:
             return players
 
-        pivot = players[0]
+        pivot = players[len(players) // 2]
         left = []
+        middle = []  #used as pivot
         right = []
 
-        for player in players[1:]:
+        for player in players:
             if player.score > pivot.score:
                 left.append(player)
-            else:
+            elif player.score < pivot.score:
                 right.append(player)
+            else:
+                middle.append(player)
 
-        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+        return cls.sort_quickly(left) + middle + cls.sort_quickly(right)
+
     def __hash__(self):
         """Return hash value for the player."""
         return self.calculate_hash(self.__uid)

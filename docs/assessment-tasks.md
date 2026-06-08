@@ -377,7 +377,29 @@ Create a test case that tries to sort 1000 players that are already sorted.
 If you get a failure, include the failure below:
 
 ```text
-YOUR FAILURE HERE
+======================================================================
+ERROR: test_custom_sort_quickly_with_1000_sorted_players (test_player.PlayerTest.test_custom_sort_quickly_with_1000_sorted_players)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\test\test_player.py", line 95, in test_custom_sort_quickly_with_1000_sorted_players
+    sorted_players = Player.sort_quickly(players)
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\app\player.py", line 63, in sort_quickly
+    return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+                                              ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\app\player.py", line 63, in sort_quickly
+    return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+                                              ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\app\player.py", line 63, in sort_quickly
+    return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+                                              ~~~~~~~~~~~~~~~~^^^^^^^
+  [Previous line repeated 980 more times]
+  File "C:\Users\acer\source\repos\SRUS-JDG-Games\app\player.py", line 58, in sort_quickly
+    if player.score > pivot.score:
+       ^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded
+
+----------------------------------------------------------------------
+
 ```
 
 ##### 5.3.4.1 Question: Why does the algorithm fail on presorted values?
@@ -386,13 +408,37 @@ Provide a reason why this test failed (if you got a recursion errors, you need t
 
 If your implementation did not fail, you must nevertheless explain why the senior developers algorithm has worse space complexity for presorted values.
 
-> Answer here
+> Answer here:
+> This algorith fails with presorted values due to its logic to always choose the first value as pivot. 
+> If the list is already sorted, the pivot fails to divide the list in a balanced way, placing the majority
+> of values on one side whereas the other side hardly gets anything. 
+>The result of that unbalanced behavoiur causes a recursion error. 
 
 Propose a fix to your sorting algorithm that fixes this issue.
 
-```python
-# YOUR FIX HERE
-# Highlight what the fix was
+```
+@classmethod
+    def sort_quickly(cls, players):
+        """Return players sorted by score in descending order."""
+
+        if len(players) <= 1:
+            return players
+
+        pivot = players[len(players) // 2]
+        left = []
+        middle = []  #used as pivot
+        right = []
+
+        for player in players:
+            if player.score > pivot.score:
+                left.append(player)
+            elif player.score < pivot.score:
+                right.append(player)
+            else:
+                middle.append(player)
+
+        return cls.sort_quickly(left) + middle + cls.sort_quickly(right)
+
 ```
 
 #### 5.3.5. Success criteria
@@ -408,13 +454,13 @@ Propose a fix to your sorting algorithm that fixes this issue.
 Complete the following snippet before you submit:
 
 ```text
-I, <name and student number>, completed this work in class <room number>, on <date>, under the supervision of <assessor's name>.
+I, <Juan Garcia 20114823>, completed this work in class <302>, on < 8/6/2026 >, under the supervision of <Alexander>.
 ```
 
 Or (if not completed in class):
 
 ```text
-I, <name and student number>, completed this work outside of the scheduled hours. I emailed <assessors name>, on <date>, along with my documented reason for non-attendance, and have scheduled a time to meet to discuss my work.
+I, <>, completed this work outside of the scheduled hours. I emailed <>, on <date>, along with my documented reason for non-attendance, and have scheduled a time to meet to discuss my work.
 
 I understand that until I meet my assessor to confirm that this work is a valid and true representation of my abilities to write and debug a sorting algorithm in Python, this submission cannot be considered complete.
 
