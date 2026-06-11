@@ -67,3 +67,43 @@ class PlayerBST:
                 current_node = current_node.left
 
         return None
+
+    def balance(self):
+        """balance the binary search tree."""
+
+        players = []
+
+        self.__add_players_to_list(self.__root, players)
+
+        self.__root = self.__build_balanced_tree(players)
+
+    def __add_players_to_list(self, current_node, players):
+        """add players to list in sorted order."""
+
+        if current_node is None:
+            return
+
+        self.__add_players_to_list(current_node.left, players)
+
+        players.append(current_node.player)
+
+        self.__add_players_to_list(current_node.right, players)
+
+    def __build_balanced_tree(self, players):
+        """method to build a balanced tree from sorted players"""
+
+        if len(players) == 0:
+            return None
+
+        middle_index = len(players) // 2
+        middle_player = players[middle_index]
+
+        new_node = PlayerBNode(middle_player)
+
+        left_players = players[:middle_index]
+        right_players = players[middle_index + 1:]
+
+        new_node.left = self.__build_balanced_tree(left_players)
+        new_node.right = self.__build_balanced_tree(right_players)
+
+        return new_node
