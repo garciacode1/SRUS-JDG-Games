@@ -45,6 +45,43 @@ class PlayerBSTTest(unittest.TestCase):
         self.assertEqual("p1", player_bst.root.player.uid)
         self.assertEqual("John", player_bst.root.player.name)
 
+    def test_search_returns_none_when_player_is_not_found(self):
+        player_bst = PlayerBST()
+
+        player_bst.insert(Player("p1", "John"))
+        player_bst.insert(Player("p2", "Eve"))
+        player_bst.insert(Player("p3", "Marcos"))
+
+        found_player = player_bst.search("Paul")
+
+        self.assertIsNone(found_player)
+
+    def test_search_finds_player_on_left_side(self):
+        player_bst = PlayerBST()
+
+        root_player = Player("p1", "Marcos")
+        left_player = Player("p2", "Eve")
+
+        player_bst.insert(root_player)
+        player_bst.insert(left_player)
+
+        found_player = player_bst.search("Eve")
+
+        self.assertEqual(left_player, found_player)
+
+    def test_search_finds_player_on_right_side(self):
+        player_bst = PlayerBST()
+
+        root_player = Player("p1", "John")
+        right_player = Player("p2", "Marcos")
+
+        player_bst.insert(root_player)
+        player_bst.insert(right_player)
+
+        found_player = player_bst.search("Marcos")
+
+        self.assertEqual(right_player, found_player)
+
 
 if __name__ == "__main__":
     unittest.main()

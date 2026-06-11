@@ -47,3 +47,23 @@ class PlayerBST:
         # avoid duplicate if name already exists
         else:
             return
+
+    def search(self, name):
+        """search player by name"""
+
+        current_node = self.__root
+
+        while current_node is not None:
+
+            current_name = current_node.player.name
+
+            if name == current_name:
+                return current_node.player
+
+            elif name > current_name:
+                current_node = current_node.right
+
+            else:
+                current_node = current_node.left
+
+        return None
