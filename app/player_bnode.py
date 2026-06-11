@@ -30,4 +30,3 @@ class PlayerBNode:
     def right(self, node):
         """Set right child node"""
         self.__right = node
-
